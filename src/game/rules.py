@@ -6,17 +6,17 @@ def rotCW(a): return np.fliplr(a.T)
 def rotCCW(a): return np.flipud(a.T)
 
 
-LEFT = "left"
-UP = "up"
-RIGHT = "right"
-DOWN = "down"
+LEFT = 0
+UP = 1
+RIGHT = 2
+DOWN = 3
 
 
 moves = {
-    "left": [identity, identity],
-    "up": [rotCCW, rotCW],
-    "right": [np.fliplr, np.fliplr],
-    "down": [rotCW, rotCCW]
+    LEFT: [rotCCW, rotCW],
+    UP: [identity, identity],
+    RIGHT: [rotCW, rotCCW],
+    DOWN: [np.fliplr, np.fliplr],
 }
 
 
@@ -50,8 +50,8 @@ def is_done(state):
     if num_zeros > 0:
         return False
     else:
-        up = next_state(state, 'up')
-        left = next_state(state, 'left')
+        up = next_state(state, UP)
+        left = next_state(state, LEFT)
         return np.all(up == left)
 
 
